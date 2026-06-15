@@ -1,1 +1,137 @@
+import random
 
+class RuleBasedChatbot:
+    def __init__(self):
+        self.rules = {
+            'hello': {
+                'patterns': ['hello', 'hi', 'hey', 'greetings', 'what\'s up', 'how are you', 'good morning', 'good afternoon', 'good evening', 
+                             'hi there', 'hello there', 'hey there', 'greetings!', 'what\'s up?', 'how are you?', 'good morning!', 'good afternoon!', 
+                             'good evening!', 'hi!', 'hello!', 'hey!', 'hlo', 'Hlo'],
+                'responses': [
+                    'Hello! How can I help you today?',
+                    'Hi there! What would you like to ask?',
+                    'Hey! Welcome! How can I assist you?'
+                ]
+            },
+            'name': {
+                'patterns': ['what is your name', 'who are you', 'your name', 'tell me about yourself', 'what do you call yourself', 
+                             'who am i talking to', 'can you introduce yourself', 'what should i call you', 'what is your identity', 'who are you', 
+                             'what do you go by', 'can you tell me your name', 'what is your name?', 'who are you?', 'tell me about yourself', 'what do you call yourself?',
+                             'who am i talking to?', 'can you introduce yourself?', 'what should i call you?', 'what is your identity?', 'what do you go by?'],
+                'responses': [
+                    'I am a simple chatbot created to help you.',
+                    'My name is ChatBot, a basic AI assistant.',
+                    'I\'m a chatbot designed for simple conversations.'
+                ]
+            },
+            'help': {
+                'patterns': ['help', 'what can you do', 'what are your features', 'how can you assist me', 'what can you help me with',
+                             'what can you assist with', 'what do you do', 'what can you help with', 'how can you help me', 
+                             'what are your functions', 'what services do you offer', 'what tasks can you perform', 
+                             'how can you assist me today', 'what can you do for me', 'what are your capabilities', 'how can you assist me today' ],
+                'responses': [
+                    'I can respond to basic queries like greetings, asking my name, and more!',
+                    'I handle greetings, name questions, and simple fact queries.',
+                    'Try asking me hello, what\'s my name, or help!'
+                ]
+            },
+            'bye': {
+                'patterns': ['bye', 'goodbye', 'exit', 'quit', 'see you', 'let\'s meet again', 'talk to you later',
+                             'catch you later', 'till next time', 'bye bye', 'farewell', 'take care', 'see you later', 
+                             'good night', 'have a nice day', 'see you soon', 'talk to you later', 'until next time', 
+                             'see you around', 'catch you later', 'have a good one', 'see you next time',],
+                'responses': [
+                    'Goodbye! Have a great day!',
+                    'See you later! Take care!',
+                    'Bye! Feel free to come back anytime.'
+                ]
+            },
+            'weather': {
+                'patterns': ['what\'s the weather', 'is it raining', 'temperature', 'weather today', 'how is the weather', 'is it going to rain',
+                             'what\'s the weather now', 'weather forecast', 'weather outside', 'weather conditions', 'can i know the weather',
+                             'weather report', 'weather update', 'weather info', 'weather information', 'is it sunny', 'is it cold', 'is it hot', 
+                             'what\'s the temperature', 'how\'s the weather', 'what\'s the weather like', ],
+                'responses': [
+                    'I don\'t have real-time weather data, but I can tell you it\'s June 2026!',
+                    'For weather info, check a weather app. But I know it\'s summer in June!',
+                    'I\'m rule-based, so I can\'t check live weather, but June is typically warm!',
+                ]
+            },
+            'joke': {
+                'patterns': ['joke', 'tell me a joke', 'funny', 'make me laugh', 'jokes', 'can you tell a joke', 'do you know any jokes', 
+                             'give me a joke', 'say something funny', 'make me smile', 'lighten the mood', 'cheer me', 'joke please', 
+                             'i want to hear a joke', 'can you share a joke', 'do you have any jokes', 'tell me something funny'],
+                'responses': [
+                    'Why do programmers prefer dark mode? Because light attracts bugs!',
+                    'What do you call a fake noodle? An impasta!',
+                    'Why did the developer go to therapy? Because they had too many bugs!'
+                ]
+            },
+            'bored': {
+                'patterns': ['bored', 'i am bored', 'i am bored', 'i\'m bored', 'feeling bored', 'so bored', 'very bored', 'getting bored', 'bored out of my mind',
+                             'bored to death', 'bored stiff', 'bored as a rock', 'bored to tears', 'bored to sleep', 'bored to death', 'bored stiff', 'bored as a rock',
+                             'bored to tears', 'bored to sleep', 'bored out of my mind', 'so bored', 'very bored', 'getting bored', 'i\'m bored', 'i am bored', 'bored'],
+                'responses': [
+                    'Maybe try listening to music, watching a short video, or taking a short walk.',
+                    'You could read something interesting, play a small game, or chat with me more.',
+                    'How about trying a new hobby, solving a puzzle, or taking a quick break?',
+                    'Maybe listen to your favorite songs or do something creative for a few minutes.'
+                ]
+            },
+            'general': {
+                'patterns': ['ok', 'okay', 'k', 'kk', 'super', 'nice', 'cool',
+                            'fine', 'good', 'great', 'alright', 'all right',
+                            'hmm', 'oh', 'yes', 'yep', 'yeah'],
+                            'responses': [
+                                'Okay! Tell me if you need anything else.',
+                                'Super! What would you like to do next?',
+                                'Alright, I am here to help.',
+                                'Nice! You can ask me another question.',
+                                'Got it. Please continue.'
+              ]
+            },
+            'default': {
+                'patterns': [],
+                'responses': [
+                    'I am not sure how to respond to that. Try asking hello, my name, or help!',
+                    'I don\'t understand that query. Try simple phrases like hello or bye.',
+                    'Could you rephrase that? I handle greetings, names, and basic facts.'
+                ]
+            }
+        }
+    
+    def get_response(self, user_input):
+        
+        normalized_input = user_input.lower().strip()
+        
+
+        for category, rule_data in self.rules.items():
+            if category == 'default':
+                continue
+            for pattern in rule_data['patterns']:
+                
+                if pattern == normalized_input or pattern in normalized_input:
+                    
+                    return random.choice(rule_data['responses'])
+
+        return random.choice(self.rules['default']['responses'])
+    
+    def chat(self):
+        
+        print("=== Simple Rule-Based Chatbot ===")
+        print("I respond to predefined rules. Type 'bye' to exit.")
+        print("Try: hello, what is your name, help, joke, weather\n")
+        
+        while True:
+
+            user_input = input("You: ")
+            
+            response = self.get_response(user_input)
+            print(f"ChatBot: {response}")
+            print()
+            if user_input.lower().strip() in ['bye', 'goodbye', 'exit', 'quit']:
+                break
+
+if __name__ == "__main__":
+    chatbot = RuleBasedChatbot()
+    chatbot.chat()
