@@ -1,0 +1,133 @@
+import cv2
+import os
+import numpy as np
+
+KNOWN_FACES_DIR = "known_faces"
+TEST_IMAGE_PATH = "test.jpg"
+OUTPUT_IMAGE_PATH = "result.jpg"
+
+CASCADE_PATH = cv2.data.haarcascades + "haarcascade_frontalface_default.xml"
+FACE_SIZE = (120, 120)
+MATCH_THRESHOLD = 5000
+
+
+def load_face_detector():
+    detector = cv2.CascadeClassifier(CASCADE_PATH)
+    if detector.empty():
+        raise ValueError("Could not load Haar Cascade file.")
+    return detector
+
+
+def detect_faces(image, detector):
+    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    faces = detector.detectMultiScale(
+        gray,
+        scaleFactor=1.1,
+        minNeighbors=5,
+        minSize=(40, 40)
+    )
+    return gray, faces
+
+
+def preprocess_face(gray_image, face_box):
+    x, y, w, h = face_box
+    face = gray_image[y:y + h, x:x + w]
+    face = cv2.resize(face, FACE_SIZE)
+    face = cv2.equalizeHist(face)
+    return face
+
+
+def load_known_faces(detector):
+    known_faces = []
+
+    if not os.path.exists(KNOWN_FACES_DIR):
+        raise FileNotFoundError(f"Folder not found: {KNOWN_FACES_DIR}")
+
+    for file_name in os.listdir(KNOWN_FACES_DIR):
+        file_path = os.path.join(KNOWN_FACES_DIR, file_name)
+
+        if not file_name.lower().endswith((".jpg", ".jpeg", ".png")):
+            continue
+
+        image = cv2.imread(file_path)
+        if image is None:
+            print(f"Skipping unreadable file: {file_name}")
+            continue
+
+        gray, faces = detect_faces(image, detector)
+
+        if len(faces) == 0:
+            print(f"No face found in: {file_name}")
+            continue
+
+        largest_face = sorted(faces, key=lambda f: f[2] * f[3], reverse=True)[0]
+        processed_face = preprocess_face(gray, largest_face)
+        person_name = os.path.splitext(file_name)[0]
+
+        known_faces.append((person_name, processed_face))
+
+    return known_faces
+
+
+def compare_faces(test_face, known_faces):
+    best_name = "Unknown"
+    best_score = float("inf")
+
+    for person_name, known_face in known_faces:
+        difference = cv2.absdiff(test_face, known_face)
+        score = np.sum(difference)
+
+        if score < best_score:
+            best_score = score
+            best_name = person_name
+
+    if best_score > MATCH_THRESHOLD:
+        return "Unknown", best_score
+
+    return best_name, best_score
+
+
+def recognize_faces_in_image():
+    detector = load_face_detector()
+    known_faces = load_known_faces(detector)
+
+    if len(known_faces) == 0:
+        print("No valid known faces found.")
+        return
+
+    test_image = cv2.imread(TEST_IMAGE_PATH)
+    if test_image is None:
+        print(f"Could not read test image: {TEST_IMAGE_PATH}")
+        return
+
+    gray, faces = detect_faces(test_image, detector)
+
+    if len(faces) == 0:
+        print("No faces detected in test image.")
+        return
+
+    for (x, y, w, h) in faces:
+        test_face = preprocess_face(gray, (x, y, w, h))
+        predicted_name, score = compare_faces(test_face, known_faces)
+
+        cv2.rectangle(test_image, (x, y), (x + w, y + h), (0, 255, 0), 2)
+
+        label = f"{predicted_name}"
+        cv2.putText(
+            test_image,
+            label,
+            (x, y - 10),
+            cv2.FONT_HERSHEY_SIMPLEX,
+            0.8,
+            (0, 255, 0),
+            2
+        )
+
+        print(f"Face detected: {predicted_name}, score: {int(score)}")
+
+    cv2.imwrite(OUTPUT_IMAGE_PATH, test_image)
+    print(f"Output saved as: {OUTPUT_IMAGE_PATH}")
+
+
+if __name__ == "__main__":
+    recognize_faces_in_image()
