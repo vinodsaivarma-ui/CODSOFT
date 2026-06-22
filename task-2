@@ -1,1 +1,136 @@
+movies = [
+   
+    {"title": "Baahubali: The Beginning", "features": ["action", "epic", "war", "drama"]},
+    {"title": "Baahubali 2: The Conclusion", "features": ["action", "epic", "war", "drama"]},
+    {"title": "RRR", "features": ["action", "period", "patriotic", "drama"]},
+    {"title": "Eega", "features": ["fantasy", "thriller", "revenge", "drama"]},
+    {"title": "Magadheera", "features": ["fantasy", "romance", "action", "period"]},
+    {"title": "Arundhati", "features": ["horror", "fantasy", "thriller", "drama"]},
+    {"title": "Annamayya", "features": ["devotional", "drama", "musical", "classic"]},
+    {"title": "Sankarabharanam", "features": ["musical", "drama", "classic", "emotional"]},
+    {"title": "Sagara Sangamam", "features": ["drama", "dance", "classic", "emotional"]},
+    {"title": "Swathi Muthyam", "features": ["drama", "classic", "emotional", "family"]},
+    {"title": "Mayabazar", "features": ["mythology", "classic", "fantasy", "comedy"]},
+    {"title": "Missamma", "features": ["classic", "comedy", "family", "romance"]},
+    {"title": "Gundamma Katha", "features": ["classic", "comedy", "family", "drama"]},
+    {"title": "Jagadeka Veerudu Athiloka Sundari", "features": ["fantasy", "romance", "family", "drama"]},
+    {"title": "Aditya 369", "features": ["sci-fi", "fantasy", "adventure", "classic"]},
+    {"title": "Shiva", "features": ["action", "crime", "college", "drama"]},
+    {"title": "Geethanjali", "features": ["romance", "emotional", "drama", "classic"]},
+    {"title": "Money", "features": ["comedy", "crime", "drama", "fun"]},
+    {"title": "Hello Brother", "features": ["comedy", "action", "family", "fun"]},
+    {"title": "Ninne Pelladatha", "features": ["romance", "family", "drama", "emotional"]},
+    {"title": "Preminchukundam Raa", "features": ["romance", "action", "drama", "family"]},
+    {"title": "Thammudu", "features": ["sports", "action", "drama", "youth"]},
+    {"title": "Kalisundam Raa", "features": ["family", "drama", "romance", "emotional"]},
+    {"title": "Nuvvu Naaku Nachav", "features": ["romance", "comedy", "family", "fun"]},
+    {"title": "Manmadhudu", "features": ["romance", "comedy", "fun", "family"]},
+    {"title": "Malliswari", "features": ["romance", "comedy", "family", "fun"]},
+    {"title": "Aha Naa Pellanta", "features": ["comedy", "classic", "family", "fun"]},
+    {"title": "Bommarillu", "features": ["romance", "family", "drama", "emotional"]},
+    {"title": "Happy Days", "features": ["college", "friendship", "youth", "drama"]},
+    {"title": "Arya", "features": ["romance", "youth", "drama", "fun"]},
+    {"title": "Arya 2", "features": ["romance", "psychological", "drama", "youth"]},
+    {"title": "Pokiri", "features": ["action", "crime", "mass", "thriller"]},
+    {"title": "Athadu", "features": ["action", "thriller", "comedy", "crime"]},
+    {"title": "Okkadu", "features": ["action", "romance", "sports", "drama"]},
+    {"title": "Khaleja", "features": ["fantasy", "comedy", "action", "fun"]},
+    {"title": "Dookudu", "features": ["action", "comedy", "mass", "fun"]},
+    {"title": "Businessman", "features": ["action", "crime", "mass", "drama"]},
+    {"title": "Srimanthudu", "features": ["action", "family", "village", "drama"]},
+    {"title": "Maharshi", "features": ["drama", "message", "village", "action"]},
+    {"title": "Sarileru Neekevvaru", "features": ["action", "comedy", "army", "mass"]},
+    {"title": "Ala Vaikunthapurramuloo", "features": ["family", "drama", "comedy", "romance"]},
+    {"title": "Julayi", "features": ["action", "comedy", "crime", "fun"]},
+    {"title": "Sarrainodu", "features": ["action", "mass", "romance", "drama"]},
+    {"title": "Race Gurram", "features": ["action", "comedy", "family", "fun"]},
+    {"title": "Parugu", "features": ["romance", "family", "drama", "emotional"]},
+    {"title": "Vedam", "features": ["drama", "multi-story", "emotional", "social"]},
+    {"title": "Leader", "features": ["political", "drama", "message", "realistic"]},
+    {"title": "Prasthanam", "features": ["political", "crime", "drama", "intense"]},
+    {"title": "Gamyam", "features": ["road", "drama", "emotional", "message"]},
+    {"title": "Kanche", "features": ["war", "romance", "period", "drama"]},
+ 
+    {"title": "Iron Man", "features": ["action", "superhero", "tech", "sci-fi"]},
+    {"title": "Iron Man 2", "features": ["action", "superhero", "tech", "sci-fi"]},
+    {"title": "Iron Man 3", "features": ["action", "superhero", "tech", "thriller"]},
+    {"title": "The Avengers", "features": ["action", "superhero", "team", "sci-fi"]},
+    {"title": "Avengers: Age of Ultron", "features": ["action", "superhero", "team", "sci-fi"]},
+    {"title": "Avengers: Infinity War", "features": ["action", "superhero", "team", "epic"]},
+    {"title": "Avengers: Endgame", "features": ["action", "superhero", "team", "epic"]},
+    {"title": "Captain America: The First Avenger", "features": ["action", "superhero", "war", "period"]},
+    {"title": "Captain America: The Winter Soldier", "features": ["action", "superhero", "spy", "thriller"]},
+    {"title": "Captain America: Civil War", "features": ["action", "superhero", "team", "drama"]},
+    {"title": "Thor", "features": ["action", "superhero", "fantasy", "mythology"]},
+    {"title": "Thor: Ragnarok", "features": ["action", "superhero", "fantasy", "comedy"]},
+    {"title": "Doctor Strange", "features": ["action", "superhero", "fantasy", "magic"]},
+    {"title": "Doctor Strange in the Multiverse of Madness", "features": ["action", "superhero", "fantasy", "multiverse"]},
+    {"title": "Black Panther", "features": ["action", "superhero", "drama", "epic"]},
+    {"title": "Black Panther: Wakanda Forever", "features": ["action", "superhero", "drama", "emotional"]},
+    {"title": "Captain Marvel", "features": ["action", "superhero", "space", "sci-fi"]},
+    {"title": "Ant-Man", "features": ["action", "superhero", "comedy", "sci-fi"]},
+    {"title": "Ant-Man and the Wasp", "features": ["action", "superhero", "comedy", "sci-fi"]},
+    {"title": "Spider-Man: Homecoming", "features": ["action", "superhero", "youth", "fun"]},
+    {"title": "Spider-Man: Far From Home", "features": ["action", "superhero", "youth", "adventure"]},
+    {"title": "Spider-Man: No Way Home", "features": ["action", "superhero", "multiverse", "emotional"]},
+    {"title": "Shang-Chi and the Legend of the Ten Rings", "features": ["action", "superhero", "martial-arts", "fantasy"]},
+    {"title": "Guardians of the Galaxy", "features": ["action", "superhero", "space", "comedy"]},
+    {"title": "Guardians of the Galaxy Vol. 3", "features": ["action", "superhero", "space", "emotional"]},
 
+    {"title": "Jurassic World", "features": ["adventure", "sci-fi", "dinosaur", "action"]},
+    {"title": "Jurassic World: Fallen Kingdom", "features": ["adventure", "sci-fi", "dinosaur", "thriller"]},
+    {"title": "Jurassic World Dominion", "features": ["adventure", "sci-fi", "dinosaur", "action"]},
+    {"title": "Jurassic World Rebirth", "features": ["adventure", "sci-fi", "dinosaur", "action"]},
+
+    {"title": "Toy Story", "features": ["animation", "family", "comedy", "adventure"]},
+    {"title": "Toy Story 3", "features": ["animation", "family", "emotional", "adventure"]},
+    {"title": "Finding Nemo", "features": ["animation", "family", "adventure", "emotional"]},
+    {"title": "Finding Dory", "features": ["animation", "family", "adventure", "comedy"]},
+    {"title": "The Lion King", "features": ["animation", "family", "drama", "emotional"]},
+    {"title": "Frozen", "features": ["animation", "fantasy", "family", "musical"]},
+    {"title": "Frozen 2", "features": ["animation", "fantasy", "family", "adventure"]},
+    {"title": "Moana", "features": ["animation", "adventure", "family", "fantasy"]},
+    {"title": "Coco", "features": ["animation", "family", "musical", "emotional"]},
+    {"title": "Inside Out", "features": ["animation", "family", "emotional", "fantasy"]},
+    {"title": "Zootopia", "features": ["animation", "comedy", "adventure", "family"]},
+    {"title": "Kung Fu Panda", "features": ["animation", "action", "comedy", "family"]},
+    {"title": "How to Train Your Dragon", "features": ["animation", "fantasy", "adventure", "family"]},
+    {"title": "Shrek", "features": ["animation", "comedy", "fantasy", "family"]},
+    {"title": "Despicable Me", "features": ["animation", "comedy", "family", "fun"]}
+]
+
+def recommend(movie_name, top_n=5):
+    selected_movie = None
+
+    for movie in movies:
+        if movie["title"].lower() == movie_name.lower():
+            selected_movie = movie
+            break
+
+    if selected_movie is None:
+        return "Movie not found in the dataset."
+
+    scores = []
+
+    for movie in movies:
+        if movie["title"] != selected_movie["title"]:
+            common = set(selected_movie["features"]) & set(movie["features"])
+            score = len(common)
+
+            if score > 0:
+                scores.append((movie["title"], score, list(common)))
+
+    scores.sort(key=lambda x: x[1], reverse=True)
+    return scores[:top_n]
+
+print("Total movies in dataset:", len(movies))
+movie_name = input("Enter a movie name: ")
+
+result = recommend(movie_name)
+
+print("\nRecommended movies:")
+if isinstance(result, str):
+    print(result)
+else:
+    for title, score, matched_features in result:
+        print(title, "- similarity score:", score, "- matched features:", matched_features)
